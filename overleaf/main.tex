@@ -43,7 +43,7 @@ a.tsailas-1@student.tudelft.nl}
     \item[C.] What happens to IR drop, supply noise, and voltage droop when you move the power rails to the backside?
     \item[D.] Which electromagnetic coupling effects between power and signal lines does BSPDN help reduce?
     \item[E.] What new signal integrity risks come with BSPDN, for instance nanoTSV parasitics or self-heating from the thinned substrate?
-    \item[F.] How do researchers simulate and measure signal integrity when comparing FSPDN and BSPDN?
+    \item[F.] What simulation and measurement approaches are used to compare signal integrity between FSPDN and BSPDN?
     \item[G.] How do Intel's PowerVia and imec's buried-power-rail approach compare in terms of signal integrity results?
     \item[H.] What open questions remain, and where should future work focus to fully understand BSPDN signal integrity?
 \end{enumerate}
@@ -54,11 +54,11 @@ a.tsailas-1@student.tudelft.nl}
 
 \subsection{Proposed Structure}
 
-We plan to organize the paper in five main parts. The introduction will set up the scaling problem and explain why backside power delivery has gained traction (sub-questions A, B, and the main question). After that, a short method section will describe how we searched for literature: which databases, what keywords, and how we filtered results.
+The paper will have five sections. We open with an introduction that sets up the scaling problem and explains why backside power delivery has gained traction (sub-questions A, B, and the main question). A short method section follows, describing our literature search: which databases we used, what keywords, and our selection criteria.
 
-The body will have three sections. First, we cover the limitations of conventional front-side PDN and make the case for why the industry is moving to backside delivery (A, B). Then we discuss the actual signal integrity improvements that have been reported: lower IR drop, less coupling, and how different implementations compare (C, D, G). The third body section looks at the flip side: the new challenges BSPDN introduces, like nanoTSV parasitics, thermal penalties, and wafer warpage, along with the simulation methods used to study them (E, F).
+The body will have three sections. First, we cover the limitations of conventional front-side PDN and make the case for why the industry is moving to backside delivery (A, B). Then we discuss the actual signal integrity improvements that have been reported: lower IR drop, less coupling, and how different implementations compare (C, D, G). A third body section covers the flip side: new problems BSPDN introduces, like nanoTSV parasitics, thermal penalties, and wafer warpage, plus how researchers have tried to model these effects (E, F).
 
-Finally, the discussion and conclusion will bring it all together by weighing the benefits against the drawbacks, comparing the different industry approaches, and pointing out what still needs to be figured out (G, H, main question).
+In the discussion and conclusion we ask: are the signal integrity improvements worth the extra process steps and the thermal hit? We also lay out what remains unresolved (G, H, main question).
 
 % ============================================================
 \section{Annotated Bibliography}
@@ -68,22 +68,22 @@ Finally, the discussion and conclusion will bring it all together by weighing th
 \subsection{Reference 1}
 W.~Hafez \textit{et al.}, ``Intel PowerVia technology: Backside power delivery for high density and high-performance computing,'' in \textit{Proc. IEEE Symp. VLSI Technol. Circuits}, Kyoto, Japan, Jun.~2023, doi: 10.23919/VLSITechnologyandCir57934.2023.10185208.
 
-This paper is arguably the most important industry reference on backside power delivery right now, with over 50 citations since 2023. Intel built PowerVia on top of their Intel~4 finFET process, and the core idea is straightforward: instead of sharing the front-side metals between power and signals, they run power from the back of the wafer directly to the transistor source/drain contacts. The front side then has all 14 metal layers free for signal routing.
+This is the most-cited industry paper on backside power delivery, with over 50 citations since 2023. Intel built PowerVia on top of their Intel~4 finFET process: instead of sharing the front-side metals between power and signals, they run power from the back of the wafer directly to the transistor source/drain contacts. The front side then has all 14 metal layers free for signal routing.
 
 \textbf{Motive:} At advanced nodes, designers are forced to give up signal routing tracks for power delivery. This trade-off caps both the density and the performance of the chip.
 
 \textbf{Objective:} Demonstrate a working backside power delivery technology on Intel~4 and measure how much it actually helps in terms of cell utilization, voltage droop, and clock speed.
 
-\textbf{Conclusion:} The results are significant. They report more than 90\% cell utilization on a fabricated E-core, a 30\%+ reduction in voltage droop from package to transistor, and 6\% higher frequency compared to the same design without PowerVia. Importantly, transistor reliability metrics (TDDB, BTI, HCI) and manufacturing yield were not affected by the backside process.
+\textbf{Conclusion:} They report more than 90\% cell utilization on a fabricated E-core, a 30\%+ reduction in voltage droop from package to transistor, and a 6\% clock speed boost over the same design without PowerVia. Transistor reliability metrics (TDDB, BTI, HCI) and manufacturing yield were not affected by the backside process.
 
 \textbf{Argumentation:}
 \begin{enumerate}
     \item The PowerVia connection sits coplanar with the source/drain contacts, so power reaches the transistor through a much shorter, lower-resistance path than in a conventional front-side PDN.
     \item They measured a 5$\times$ simulated IR drop reduction from bump to transistor. On-chip monitors confirmed over 30\% droop improvement at the package level.
-    \item Yield tracks the baseline Intel~4 process closely, which matters because it shows this is not just a research demo but something headed for volume production.
+    \item Yield tracks the baseline Intel~4 process closely, which suggests the technology is ready for volume production.
 \end{enumerate}
 
-\textbf{Help:} We will use this paper heavily for sub-questions B, C, and G. It gives us hard numbers on what backside delivery can achieve in practice, and it is the reference point against which other BSPDN approaches can be compared.
+\textbf{Help:} We will use this paper heavily for sub-questions B, C, and G. It gives us hard numbers on what backside delivery can achieve in practice, and other BSPDN approaches can be measured against it.
 
 \bigskip
 
@@ -93,19 +93,19 @@ D.~Prasad, S.~S.~Teja~Nibhanupudi, S.~Das, O.~Zografos, B.~Chehab, and S.~Sarkar
 
 This is one of the earliest and most-cited papers (69 citations) that systematically compares three PDN architectures: the conventional front-side approach, front-side with buried power rails, and full backside delivery with buried rails. The authors used the Arm Cortex-A53 CPU as their benchmark, placed and routed at imec's 3\,nm node, which makes the comparison very concrete.
 
-\textbf{Motive:} At 3\,nm, the wire resistance is so high that even with aggressive power grid tuning, front-side PDN cannot keep IR drop within the margins a high-performance CPU needs.
+\textbf{Motive:} At 3\,nm, interconnect resistance has grown to the point where no amount of power grid optimization on the front side can hold IR drop within acceptable margins for a high-performance CPU.
 
 \textbf{Objective:} Run a complete PDN design study covering both DC (resistive drop) and AC (resonance behavior) across three architectures to see where backside delivery really helps and where it might cause new issues.
 
-\textbf{Conclusion:} Backside delivery with buried rails slashes IR drop by about 7$\times$ compared to conventional front-side PDN, bringing it down to roughly 1\% of V\textsubscript{DD}. But there is a catch: the very low PDN resistance means less damping, so the chip-package system can ring more at resonance. The authors show this can be handled with on-chip decoupling capacitors, especially in multi-core designs where idle cores act as decap.
+\textbf{Conclusion:} Backside delivery with buried rails slashes IR drop by about 7$\times$ compared to conventional front-side PDN, bringing it down to roughly 1\% of V\textsubscript{DD}. But there is a catch: the very low PDN resistance reduces damping, so the chip-package system can ring at resonance. The authors show that on-chip decoupling capacitors mitigate this, especially in multi-core designs where idle cores act as decap.
 
 \textbf{Argumentation:}
 \begin{enumerate}
     \item Even the most optimized front-side PDN at 3\,nm still exceeds the 10\% V\textsubscript{DD} IR drop budget, which is a strong argument that front-side delivery is hitting a wall.
     \item With tight $\mu$TSV pitch, backside delivery gets IR drop to around 1\% of V\textsubscript{DD}. At the same time, it frees every front-side metal layer for signals. No more fighting for routing resources.
-    \item The AC analysis is particularly useful for our review. It reveals a trade-off that most papers on BSPDN do not discuss: lower resistance is great for DC drop but bad for damping at resonance.
+    \item Their AC analysis matters most for our purposes. It shows a trade-off that most BSPDN papers ignore: lower resistance helps DC drop but hurts damping at resonance.
 \end{enumerate}
 
-\textbf{Help:} This source is key for sub-questions A, C, and F. It gives us the methodology template for comparing PDN architectures and, unlike most BSPDN papers that only look at DC metrics, it also covers AC behavior. The resonance trade-off it identifies is exactly the kind of nuance our review needs to highlight.
+\textbf{Help:} This source is central to sub-questions A, C, and F. It gives us the methodology template for comparing PDN architectures and -- unusually for BSPDN work -- also looks at AC resonance behavior. That resonance trade-off is something most BSPDN papers skip, and our review should give it proper attention.
 
 \end{document}
