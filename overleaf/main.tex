@@ -15,175 +15,97 @@
 Delft University of Technology\\
 Delft, The Netherlands\\
 d.tyukov@student.tudelft.nl}
+\and
+\IEEEauthorblockN{Apostolos Tsailas (5506387)}
+\IEEEauthorblockA{Department of Microelectronics\\
+Delft University of Technology\\
+Delft, The Netherlands\\
+a.tsailas-1@student.tudelft.nl}
 \thanks{This article was written as part of the course EE4C01 Profile Orientation \& Academic Skills of the faculty Electrical Engineering, Mathematics and Computer Science of Delft University of Technology.}
 }
 
 \maketitle
 
 % ============================================================
-\section{Research Question}
+\section{Research Question and Motive}
 % ============================================================
 
-\textbf{Main question:} What are the current interconnect technologies for RF System-in-Package integration, and how do they compare in terms of parasitic performance, yield, and scalability?
+\textbf{Main question:} To what extent does backside power delivery improve signal integrity and reduce electromagnetic coupling compared to conventional front-side power distribution in advanced CMOS nodes?
+
+\medskip
+
+\textbf{Motive:} Below 5\,nm, the wires on a chip get so resistive that delivering clean power through the front side becomes a real bottleneck. The power rails and signal lines all share the same crowded metal stack, which causes IR drop issues and unwanted coupling between them. Recently, companies like Intel have started moving the power network to the backside of the wafer. Intel calls their version PowerVia, and imec has been publishing work on buried power rails paired with nano-TSVs. These approaches look promising, but they also bring new problems. Thinning the wafer to a few hundred nanometers hurts thermal spreading, the tiny TSV connections add parasitic resistance, and the fabrication itself can warp the wafer. What we noticed is that there is no paper yet that pulls all of this together and critically weighs the signal integrity gains against these new trade-offs. That is the gap we want to fill with our literature review.
 
 \subsection{Sub-questions}
 \begin{enumerate}
-    \item[A.] What is System-in-Package (SiP) and why is it important for RF applications?
-    \item[B.] What are the main interconnect technologies used in RF SiP (wire bonding, flip-chip, fan-out)?
-    \item[C.] How do gold bump flip-chip interconnects perform at RF frequencies?
-    \item[D.] How do solder-based (C4) and copper pillar interconnects compare to gold bumps?
-    \item[E.] What are the key parasitic parameters (inductance, capacitance, resistance) affecting RF performance?
-    \item[F.] What yield and reliability challenges exist for each interconnect approach?
-    \item[G.] What role do substrate materials (glass, silicon, ceramic) play in interconnect performance?
-    \item[H.] What are the current trends and future directions for RF SiP interconnects?
+    \item[A.] What are front-side power delivery networks (FSPDNs) and what signal integrity problems do they cause at advanced nodes?
+    \item[B.] How are backside power delivery networks (BSPDNs) built and what makes them structurally different from FSPDNs?
+    \item[C.] What happens to IR drop, supply noise, and voltage droop when you move the power rails to the backside?
+    \item[D.] Which electromagnetic coupling effects between power and signal lines does BSPDN help reduce?
+    \item[E.] What new signal integrity risks come with BSPDN, for instance nanoTSV parasitics or self-heating from the thinned substrate?
+    \item[F.] How do researchers simulate and measure signal integrity when comparing FSPDN and BSPDN?
+    \item[G.] How do Intel's PowerVia and imec's buried-power-rail approach compare in terms of signal integrity results?
+    \item[H.] What open questions remain, and where should future work focus to fully understand BSPDN signal integrity?
 \end{enumerate}
 
 % ============================================================
-\section{Proposed Structure}
+\section{Writing Plan}
 % ============================================================
 
-\begin{itemize}
-    \item \textbf{Abstract} $\rightarrow$ MAIN
-    \item \textbf{Introduction} $\rightarrow$ A, B, MAIN
-    \item \textbf{Background} $\rightarrow$ A, B (SiP overview, interconnect taxonomy)
-    \item \textbf{Method} $\rightarrow$ Search strategy and source selection
-    \item \textbf{Results / Body}
-    \begin{itemize}
-        \item Section 1: RF parasitic comparison $\rightarrow$ C, D, E
-        \item Section 2: Yield and reliability $\rightarrow$ F
-        \item Section 3: Substrate influence $\rightarrow$ G
-    \end{itemize}
-    \item \textbf{Discussion} $\rightarrow$ F, G, H
-    \item \textbf{Conclusion} $\rightarrow$ H, MAIN
-    \item \textbf{References}
-\end{itemize}
+\subsection{Proposed Structure}
+
+We plan to organize the paper in five main parts. The introduction will set up the scaling problem and explain why backside power delivery has gained traction (sub-questions A, B, and the main question). After that, a short method section will describe how we searched for literature: which databases, what keywords, and how we filtered results.
+
+The body will have three sections. First, we cover the limitations of conventional front-side PDN and make the case for why the industry is moving to backside delivery (A, B). Then we discuss the actual signal integrity improvements that have been reported: lower IR drop, less coupling, and how different implementations compare (C, D, G). The third body section looks at the flip side: the new challenges BSPDN introduces, like nanoTSV parasitics, thermal penalties, and wafer warpage, along with the simulation methods used to study them (E, F).
+
+Finally, the discussion and conclusion will bring it all together by weighing the benefits against the drawbacks, comparing the different industry approaches, and pointing out what still needs to be figured out (G, H, main question).
 
 % ============================================================
 \section{Annotated Bibliography}
 % ============================================================
 
-% --- Reference 1 ---
+% Reference 1 (Daniel Tyukov)
 \subsection{Reference 1}
-J.~H.~Lau, ``Recent advances and new trends in flip chip technology,'' \textit{Journal of Electronic Packaging}, vol.~138, no.~3, p.~030802, Jul.~2016.
+W.~Hafez \textit{et al.}, ``Intel PowerVia technology: Backside power delivery for high density and high-performance computing,'' in \textit{Proc. IEEE Symp. VLSI Technol. Circuits}, Kyoto, Japan, Jun.~2023, doi: 10.23919/VLSITechnologyandCir57934.2023.10185208.
 
-\textbf{Motive:} Flip-chip technology has evolved rapidly with increasing demands for higher I/O density and better electrical performance in advanced packaging.
+This paper is arguably the most important industry reference on backside power delivery right now, with over 50 citations since 2023. Intel built PowerVia on top of their Intel~4 finFET process, and the core idea is straightforward: instead of sharing the front-side metals between power and signals, they run power from the back of the wafer directly to the transistor source/drain contacts. The front side then has all 14 metal layers free for signal routing.
 
-\textbf{Objective:} To provide a comprehensive review of recent advances and emerging trends in flip-chip technology, including bumping methods, substrates, and reliability.
+\textbf{Motive:} At advanced nodes, designers are forced to give up signal routing tracks for power delivery. This trade-off caps both the density and the performance of the chip.
 
-\textbf{Conclusion:} Flip-chip technology continues to advance with new bump materials, finer pitch capabilities, and integration into 2.5D/3D packaging, making it essential for high-performance applications.
+\textbf{Objective:} Demonstrate a working backside power delivery technology on Intel~4 and measure how much it actually helps in terms of cell utilization, voltage droop, and clock speed.
+
+\textbf{Conclusion:} The results are significant. They report more than 90\% cell utilization on a fabricated E-core, a 30\%+ reduction in voltage droop from package to transistor, and 6\% higher frequency compared to the same design without PowerVia. Importantly, transistor reliability metrics (TDDB, BTI, HCI) and manufacturing yield were not affected by the backside process.
 
 \textbf{Argumentation:}
 \begin{enumerate}
-    \item Flip-chip offers superior electrical performance over wire bonding due to shorter interconnect paths.
-    \item Multiple bumping technologies (solder, Cu pillar, Au stud) serve different application domains.
-    \item Continued pitch reduction enables higher integration density.
+    \item The PowerVia connection sits coplanar with the source/drain contacts, so power reaches the transistor through a much shorter, lower-resistance path than in a conventional front-side PDN.
+    \item They measured a 5$\times$ simulated IR drop reduction from bump to transistor. On-chip monitors confirmed over 30\% droop improvement at the package level.
+    \item Yield tracks the baseline Intel~4 process closely, which matters because it shows this is not just a research demo but something headed for volume production.
 \end{enumerate}
 
-\textbf{Help:} Provides a broad overview of flip-chip technologies and their evolution, supporting sub-questions B, C, and D with comparative context across interconnect types.
+\textbf{Help:} We will use this paper heavily for sub-questions B, C, and G. It gives us hard numbers on what backside delivery can achieve in practice, and it is the reference point against which other BSPDN approaches can be compared.
 
 \bigskip
 
-% --- Reference 2 ---
+% Reference 2 (Apostolos Tsailas)
 \subsection{Reference 2}
-W.~Heinrich, ``Flip-chip for millimeter-wave and broadband packaging,'' in \textit{Proc. IEEE Int. Workshop Radio-Frequency Integration Technol. (RFIT)}, Singapore, 2005, pp.~124--126.
+D.~Prasad, S.~S.~Teja~Nibhanupudi, S.~Das, O.~Zografos, B.~Chehab, and S.~Sarkar, ``Buried power rails and back-side power grids: Arm CPU power delivery network design beyond 5nm,'' in \textit{Proc. IEEE Int. Electron Devices Meeting (IEDM)}, San Francisco, CA, USA, Dec.~2019, doi: 10.1109/IEDM19573.2019.8993617.
 
-\textbf{Motive:} Millimeter-wave systems require packaging solutions with minimal parasitics, and flip-chip has emerged as a key enabler.
+This is one of the earliest and most-cited papers (69 citations) that systematically compares three PDN architectures: the conventional front-side approach, front-side with buried power rails, and full backside delivery with buried rails. The authors used the Arm Cortex-A53 CPU as their benchmark, placed and routed at imec's 3\,nm node, which makes the comparison very concrete.
 
-\textbf{Objective:} To evaluate flip-chip bonding as an interconnect solution for mm-wave and broadband applications, focusing on parasitic performance.
+\textbf{Motive:} At 3\,nm, the wire resistance is so high that even with aggressive power grid tuning, front-side PDN cannot keep IR drop within the margins a high-performance CPU needs.
 
-\textbf{Conclusion:} Flip-chip transitions can be designed with very low parasitic effects up to mm-wave frequencies, outperforming wire-bonded alternatives.
+\textbf{Objective:} Run a complete PDN design study covering both DC (resistive drop) and AC (resonance behavior) across three architectures to see where backside delivery really helps and where it might cause new issues.
 
-\textbf{Argumentation:}
-\begin{enumerate}
-    \item Flip-chip bump transitions introduce significantly lower inductance than bond wires at mm-wave frequencies.
-    \item Careful bump geometry and pad design are critical for maintaining performance above 40~GHz.
-    \item Substrate choice affects the overall transition loss.
-\end{enumerate}
-
-\textbf{Help:} Directly addresses sub-question E by quantifying parasitic effects of flip-chip at high frequencies, and supports the RF performance comparison in the body section.
-
-\bigskip
-
-% --- Reference 3 ---
-\subsection{Reference 3}
-J.~Keech, G.~Piech, S.~Pollard, S.~Chaparala, A.~Shorey, and B.~K.~Wang, ``Glass interposer substrates: Fabrication, characterization and modeling,'' in \textit{Proc. IEEE Electron. Packag. Technol. Conf. (EPTC)}, Singapore, 2013, pp.~706--709.
-
-\textbf{Motive:} Glass substrates offer unique advantages for interposer applications but require characterization to compete with established silicon interposers.
-
-\textbf{Objective:} To present fabrication processes, electrical characterization, and modeling of glass interposer substrates.
-
-\textbf{Conclusion:} Glass interposers demonstrate low dielectric loss and are suitable for high-frequency applications, with panel-level scalability providing a cost advantage over silicon.
+\textbf{Conclusion:} Backside delivery with buried rails slashes IR drop by about 7$\times$ compared to conventional front-side PDN, bringing it down to roughly 1\% of V\textsubscript{DD}. But there is a catch: the very low PDN resistance means less damping, so the chip-package system can ring more at resonance. The authors show this can be handled with on-chip decoupling capacitors, especially in multi-core designs where idle cores act as decap.
 
 \textbf{Argumentation:}
 \begin{enumerate}
-    \item Glass has lower permittivity and loss tangent than silicon, benefiting RF performance.
-    \item Panel-level processing reduces cost compared to wafer-level silicon interposers.
-    \item CTE of glass can be tuned to match die materials, improving reliability.
+    \item Even the most optimized front-side PDN at 3\,nm still exceeds the 10\% V\textsubscript{DD} IR drop budget, which is a strong argument that front-side delivery is hitting a wall.
+    \item With tight $\mu$TSV pitch, backside delivery gets IR drop to around 1\% of V\textsubscript{DD}. At the same time, it frees every front-side metal layer for signals. No more fighting for routing resources.
+    \item The AC analysis is particularly useful for our review. It reveals a trade-off that most papers on BSPDN do not discuss: lower resistance is great for DC drop but bad for damping at resonance.
 \end{enumerate}
 
-\textbf{Help:} Directly addresses sub-question G on the role of substrate materials, providing evidence for glass as a competitive interposer platform.
-
-\bigskip
-
-% --- Reference 4 ---
-\subsection{Reference 4}
-S.~Yan, L.~Zhao, Z.~Song, R.~Li, Y.~Hao, and Z.~Zhang, ``A high-reliability Au stud bump bonding strategy based on Au pads for flip-chip bonding applications,'' in \textit{Proc. Int. Conf. Integr. Circuits Microsyst. (ICICM)}, Nanjing, China, 2024, pp.~339--343.
-
-\textbf{Motive:} Gold stud bump bonding reliability remains a concern for demanding applications, requiring optimized pad designs and bonding strategies.
-
-\textbf{Objective:} To propose and validate a high-reliability Au stud bump bonding strategy using optimized Au pad configurations.
-
-\textbf{Conclusion:} The proposed bonding strategy achieves improved reliability through optimized pad geometry and bonding parameters, demonstrating suitability for flip-chip applications.
-
-\textbf{Argumentation:}
-\begin{enumerate}
-    \item Pad geometry and surface preparation significantly influence bond reliability.
-    \item Optimized bonding parameters reduce failure rates in Au--Au interconnects.
-    \item The approach is compatible with standard thermosonic bonding equipment.
-\end{enumerate}
-
-\textbf{Help:} Addresses sub-questions C and F by presenting recent advances in Au bump reliability, providing a 2024 source meeting the recency requirement.
-
-\bigskip
-
-% --- Reference 5 ---
-\subsection{Reference 5}
-F.~Li, ``Flip-chip bonding for SiC integrated circuits with gold stud bumps for high temperature up to 600$^{\circ}$C applications,'' \textit{IEEE Trans. Compon., Packag., Manuf. Technol.}, vol.~14, no.~4, pp.~705--713, Apr.~2024.
-
-\textbf{Motive:} SiC-based electronics for extreme environments require interconnect solutions that maintain integrity at elevated temperatures.
-
-\textbf{Objective:} To demonstrate and characterize Au bump flip-chip bonding for SiC ICs operating at temperatures up to 600$^{\circ}$C.
-
-\textbf{Conclusion:} Gold stud bump flip-chip bonding provides reliable interconnects for SiC ICs at extreme temperatures, with stable electrical and mechanical performance.
-
-\textbf{Argumentation:}
-\begin{enumerate}
-    \item Au--Au thermocompression bonds maintain mechanical integrity at 600$^{\circ}$C.
-    \item Contact resistance remains stable across the tested temperature range.
-    \item The approach avoids solder-related failure mechanisms at high temperatures.
-\end{enumerate}
-
-\textbf{Help:} Supports sub-questions C and F by demonstrating Au bump reliability in extreme conditions, and serves as a second 2024 source for the recency requirement.
-
-\bigskip
-
-% --- Reference 6 ---
-\subsection{Reference 6}
-W.~Chang, Q.~Lu, J.~Zhang, W.~Xiang, C.~Zhu, M.~Zhao, and H.~Ye, ``Optimization of micro-interconnection distribution of gold stud bumps for thermo-sonic flip chip bonding,'' in \textit{Proc. Int. Conf. Electron. Packag. Technol. (ICEPT)}, Dalian, China, 2022, pp.~1--4.
-
-\textbf{Motive:} The spatial distribution of gold stud bumps affects bonding quality and yield in thermosonic flip-chip processes.
-
-\textbf{Objective:} To optimize the bump distribution pattern for thermosonic flip-chip bonding to improve interconnect uniformity and yield.
-
-\textbf{Conclusion:} Optimized bump distribution leads to more uniform bonding force and improved yield compared to conventional layouts.
-
-\textbf{Argumentation:}
-\begin{enumerate}
-    \item Non-uniform bump distribution causes uneven force application during bonding.
-    \item Optimized layouts reduce the occurrence of open and short defects.
-    \item The findings apply to both Au stud and other bump types in thermosonic processes.
-\end{enumerate}
-
-\textbf{Help:} Directly addresses sub-question F on yield challenges and supports the comparison of process optimization strategies for flip-chip bonding.
+\textbf{Help:} This source is key for sub-questions A, C, and F. It gives us the methodology template for comparing PDN architectures and, unlike most BSPDN papers that only look at DC metrics, it also covers AC behavior. The resonance trade-off it identifies is exactly the kind of nuance our review needs to highlight.
 
 \end{document}
