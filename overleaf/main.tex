@@ -1,0 +1,189 @@
+\documentclass[conference,a4paper]{IEEEtran}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\begin{document}
+
+\title{Assignment 1: Research Proposal\\Outline \& Annotated Bibliography}
+
+\author{\IEEEauthorblockN{Daniel Tyukov (5714699)}
+\IEEEauthorblockA{Department of Microelectronics\\
+Delft University of Technology\\
+Delft, The Netherlands\\
+d.tyukov@student.tudelft.nl}
+\thanks{This article was written as part of the course EE4C01 Profile Orientation \& Academic Skills of the faculty Electrical Engineering, Mathematics and Computer Science of Delft University of Technology.}
+}
+
+\maketitle
+
+% ============================================================
+\section{Research Question}
+% ============================================================
+
+\textbf{Main question:} What are the current interconnect technologies for RF System-in-Package integration, and how do they compare in terms of parasitic performance, yield, and scalability?
+
+\subsection{Sub-questions}
+\begin{enumerate}
+    \item[A.] What is System-in-Package (SiP) and why is it important for RF applications?
+    \item[B.] What are the main interconnect technologies used in RF SiP (wire bonding, flip-chip, fan-out)?
+    \item[C.] How do gold bump flip-chip interconnects perform at RF frequencies?
+    \item[D.] How do solder-based (C4) and copper pillar interconnects compare to gold bumps?
+    \item[E.] What are the key parasitic parameters (inductance, capacitance, resistance) affecting RF performance?
+    \item[F.] What yield and reliability challenges exist for each interconnect approach?
+    \item[G.] What role do substrate materials (glass, silicon, ceramic) play in interconnect performance?
+    \item[H.] What are the current trends and future directions for RF SiP interconnects?
+\end{enumerate}
+
+% ============================================================
+\section{Proposed Structure}
+% ============================================================
+
+\begin{itemize}
+    \item \textbf{Abstract} $\rightarrow$ MAIN
+    \item \textbf{Introduction} $\rightarrow$ A, B, MAIN
+    \item \textbf{Background} $\rightarrow$ A, B (SiP overview, interconnect taxonomy)
+    \item \textbf{Method} $\rightarrow$ Search strategy and source selection
+    \item \textbf{Results / Body}
+    \begin{itemize}
+        \item Section 1: RF parasitic comparison $\rightarrow$ C, D, E
+        \item Section 2: Yield and reliability $\rightarrow$ F
+        \item Section 3: Substrate influence $\rightarrow$ G
+    \end{itemize}
+    \item \textbf{Discussion} $\rightarrow$ F, G, H
+    \item \textbf{Conclusion} $\rightarrow$ H, MAIN
+    \item \textbf{References}
+\end{itemize}
+
+% ============================================================
+\section{Annotated Bibliography}
+% ============================================================
+
+% --- Reference 1 ---
+\subsection{Reference 1}
+J.~H.~Lau, ``Recent advances and new trends in flip chip technology,'' \textit{Journal of Electronic Packaging}, vol.~138, no.~3, p.~030802, Jul.~2016.
+
+\textbf{Motive:} Flip-chip technology has evolved rapidly with increasing demands for higher I/O density and better electrical performance in advanced packaging.
+
+\textbf{Objective:} To provide a comprehensive review of recent advances and emerging trends in flip-chip technology, including bumping methods, substrates, and reliability.
+
+\textbf{Conclusion:} Flip-chip technology continues to advance with new bump materials, finer pitch capabilities, and integration into 2.5D/3D packaging, making it essential for high-performance applications.
+
+\textbf{Argumentation:}
+\begin{enumerate}
+    \item Flip-chip offers superior electrical performance over wire bonding due to shorter interconnect paths.
+    \item Multiple bumping technologies (solder, Cu pillar, Au stud) serve different application domains.
+    \item Continued pitch reduction enables higher integration density.
+\end{enumerate}
+
+\textbf{Help:} Provides a broad overview of flip-chip technologies and their evolution, supporting sub-questions B, C, and D with comparative context across interconnect types.
+
+\bigskip
+
+% --- Reference 2 ---
+\subsection{Reference 2}
+W.~Heinrich, ``Flip-chip for millimeter-wave and broadband packaging,'' in \textit{Proc. IEEE Int. Workshop Radio-Frequency Integration Technol. (RFIT)}, Singapore, 2005, pp.~124--126.
+
+\textbf{Motive:} Millimeter-wave systems require packaging solutions with minimal parasitics, and flip-chip has emerged as a key enabler.
+
+\textbf{Objective:} To evaluate flip-chip bonding as an interconnect solution for mm-wave and broadband applications, focusing on parasitic performance.
+
+\textbf{Conclusion:} Flip-chip transitions can be designed with very low parasitic effects up to mm-wave frequencies, outperforming wire-bonded alternatives.
+
+\textbf{Argumentation:}
+\begin{enumerate}
+    \item Flip-chip bump transitions introduce significantly lower inductance than bond wires at mm-wave frequencies.
+    \item Careful bump geometry and pad design are critical for maintaining performance above 40~GHz.
+    \item Substrate choice affects the overall transition loss.
+\end{enumerate}
+
+\textbf{Help:} Directly addresses sub-question E by quantifying parasitic effects of flip-chip at high frequencies, and supports the RF performance comparison in the body section.
+
+\bigskip
+
+% --- Reference 3 ---
+\subsection{Reference 3}
+J.~Keech, G.~Piech, S.~Pollard, S.~Chaparala, A.~Shorey, and B.~K.~Wang, ``Glass interposer substrates: Fabrication, characterization and modeling,'' in \textit{Proc. IEEE Electron. Packag. Technol. Conf. (EPTC)}, Singapore, 2013, pp.~706--709.
+
+\textbf{Motive:} Glass substrates offer unique advantages for interposer applications but require characterization to compete with established silicon interposers.
+
+\textbf{Objective:} To present fabrication processes, electrical characterization, and modeling of glass interposer substrates.
+
+\textbf{Conclusion:} Glass interposers demonstrate low dielectric loss and are suitable for high-frequency applications, with panel-level scalability providing a cost advantage over silicon.
+
+\textbf{Argumentation:}
+\begin{enumerate}
+    \item Glass has lower permittivity and loss tangent than silicon, benefiting RF performance.
+    \item Panel-level processing reduces cost compared to wafer-level silicon interposers.
+    \item CTE of glass can be tuned to match die materials, improving reliability.
+\end{enumerate}
+
+\textbf{Help:} Directly addresses sub-question G on the role of substrate materials, providing evidence for glass as a competitive interposer platform.
+
+\bigskip
+
+% --- Reference 4 ---
+\subsection{Reference 4}
+S.~Yan, L.~Zhao, Z.~Song, R.~Li, Y.~Hao, and Z.~Zhang, ``A high-reliability Au stud bump bonding strategy based on Au pads for flip-chip bonding applications,'' in \textit{Proc. Int. Conf. Integr. Circuits Microsyst. (ICICM)}, Nanjing, China, 2024, pp.~339--343.
+
+\textbf{Motive:} Gold stud bump bonding reliability remains a concern for demanding applications, requiring optimized pad designs and bonding strategies.
+
+\textbf{Objective:} To propose and validate a high-reliability Au stud bump bonding strategy using optimized Au pad configurations.
+
+\textbf{Conclusion:} The proposed bonding strategy achieves improved reliability through optimized pad geometry and bonding parameters, demonstrating suitability for flip-chip applications.
+
+\textbf{Argumentation:}
+\begin{enumerate}
+    \item Pad geometry and surface preparation significantly influence bond reliability.
+    \item Optimized bonding parameters reduce failure rates in Au--Au interconnects.
+    \item The approach is compatible with standard thermosonic bonding equipment.
+\end{enumerate}
+
+\textbf{Help:} Addresses sub-questions C and F by presenting recent advances in Au bump reliability, providing a 2024 source meeting the recency requirement.
+
+\bigskip
+
+% --- Reference 5 ---
+\subsection{Reference 5}
+F.~Li, ``Flip-chip bonding for SiC integrated circuits with gold stud bumps for high temperature up to 600$^{\circ}$C applications,'' \textit{IEEE Trans. Compon., Packag., Manuf. Technol.}, vol.~14, no.~4, pp.~705--713, Apr.~2024.
+
+\textbf{Motive:} SiC-based electronics for extreme environments require interconnect solutions that maintain integrity at elevated temperatures.
+
+\textbf{Objective:} To demonstrate and characterize Au bump flip-chip bonding for SiC ICs operating at temperatures up to 600$^{\circ}$C.
+
+\textbf{Conclusion:} Gold stud bump flip-chip bonding provides reliable interconnects for SiC ICs at extreme temperatures, with stable electrical and mechanical performance.
+
+\textbf{Argumentation:}
+\begin{enumerate}
+    \item Au--Au thermocompression bonds maintain mechanical integrity at 600$^{\circ}$C.
+    \item Contact resistance remains stable across the tested temperature range.
+    \item The approach avoids solder-related failure mechanisms at high temperatures.
+\end{enumerate}
+
+\textbf{Help:} Supports sub-questions C and F by demonstrating Au bump reliability in extreme conditions, and serves as a second 2024 source for the recency requirement.
+
+\bigskip
+
+% --- Reference 6 ---
+\subsection{Reference 6}
+W.~Chang, Q.~Lu, J.~Zhang, W.~Xiang, C.~Zhu, M.~Zhao, and H.~Ye, ``Optimization of micro-interconnection distribution of gold stud bumps for thermo-sonic flip chip bonding,'' in \textit{Proc. Int. Conf. Electron. Packag. Technol. (ICEPT)}, Dalian, China, 2022, pp.~1--4.
+
+\textbf{Motive:} The spatial distribution of gold stud bumps affects bonding quality and yield in thermosonic flip-chip processes.
+
+\textbf{Objective:} To optimize the bump distribution pattern for thermosonic flip-chip bonding to improve interconnect uniformity and yield.
+
+\textbf{Conclusion:} Optimized bump distribution leads to more uniform bonding force and improved yield compared to conventional layouts.
+
+\textbf{Argumentation:}
+\begin{enumerate}
+    \item Non-uniform bump distribution causes uneven force application during bonding.
+    \item Optimized layouts reduce the occurrence of open and short defects.
+    \item The findings apply to both Au stud and other bump types in thermosonic processes.
+\end{enumerate}
+
+\textbf{Help:} Directly addresses sub-question F on yield challenges and supports the comparison of process optimization strategies for flip-chip bonding.
+
+\end{document}
