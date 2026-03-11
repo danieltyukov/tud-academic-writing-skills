@@ -1,9 +1,32 @@
 \section{Improvements of Back-Side Power Delivery Network Implementations}
 
-Backside-Side Power Delivery Networks improve power integrity and routing efficiency by relocating the power grid to the backside of the wafer and utilising the front-side solely for signal interconnect. The design allows for a reduction in congestion and increases routing flexibility, especially in advanced technology nodes\cite{10631463}. In dense logic areas, this architecture allows for signal interconnects to utilize lower layers on the front side of the wafer and, as a result, reduces wire lengths, reduces interconnect delay, and improves timing\cite{11192533}.
+Back-Side Power Delivery Networks improve power integrity and routing efficiency by relocating the power grid to the backside of the wafer and utilising the front-side solely for signal interconnect. The design allows for a reduction in congestion and increases routing flexibility, especially in advanced technology nodes\cite{10631463}. In dense logic areas, this architecture allows for signal interconnects to utilize lower layers on the front side of the wafer and, as a result, reduces wire lengths, reduces interconnect delay, and improves timing\cite{11192533}.
 
-A significant improvement of the BSPDN architecture is a significant reduction in IR drop. By delivering power from a dedicated backside metal layer voltage droop at the transistor level is reduced. Modelling of backside PDN configurations incorporating buried power rails and µTSVs demonstrated a more than four-fold reduction in IR-drop compared to conventional front-side PDNs\cite{8932458}. This improvement is due to the lower resistance of the thicker backside power rails and the shorter current path to the transistor layer, which bypasses the highly resistive local BEOL metal layers entirely.
+A primary improvement of the BSPDN architecture is the reduction in IR drop. By delivering power from a dedicated backside metal layer, voltage droop at the transistor level is reduced. Modelling of backside PDN configurations incorporating buried power rails and µTSVs demonstrated a more than four-fold reduction in IR-drop compared to conventional front-side PDNs\cite{8932458}. This improvement is due to the lower resistance of the thicker backside power rails and the shorter current path to the transistor layer, which bypasses the highly resistive local BEOL metal layers entirely.
 
-Intel's PowerVia Technolog, demonstated using a fabricated E-core that a BSPDN design yielded a 30\% improvement in voltage droop and 6\% frequency improvement compared to a reference FSPDN design\cite{10185208}. By splitting power delivery from the signal interconnect, PowerVia showed that BSPDN architecture supplies a more uniform supply voltage across the die, that results on lower average and worst-case IR-drop hotspots that are particularly problematic in dense logic regions\cite{10185208}.
+Intel's PowerVia Technology, demonstrated using a fabricated E-core, showed that a BSPDN design yielded a 30\% improvement in voltage droop and 6\% frequency improvement compared to a reference FSPDN design\cite{10185208}. By splitting power delivery from the signal interconnect, PowerVia supplies a more uniform supply voltage across the die, resulting in lower average and worst-case IR-drop hotspots that are particularly problematic in dense logic regions\cite{10185208}.
 
-BSPDN architecture has also shown improvements in routing efficiency and cell area. With the power grid moved to the backside of the wafer, front-side routing tracks that would be used for power delivery are freed, enabling either area reduction or increased routing flexibility at the same cell dimensions. Studies evaluating high-density designs showed area saving up to 19\% when implementing a BSPDN architecture. Signal interconnect was completed at lower metal layers, reducing overall wire length\cite{10631463}.
+BSPDN architecture has also shown improvements in routing efficiency and cell area. With the power grid moved to the backside of the wafer, front-side routing tracks that would be used for power delivery are freed, enabling either area reduction or increased routing flexibility at the same cell dimensions. Studies evaluating high-density designs showed area savings up to 19\% when implementing a BSPDN architecture. Signal interconnect was completed at lower metal layers, reducing overall wire length\cite{10631463}.
+
+Table~\ref{tab:comparison} summarises the quantitative improvements reported across the reviewed studies for each power delivery architecture relative to the conventional FSPDN baseline.
+
+\begin{table}[h]
+\centering
+\caption{Comparison of power delivery architectures at sub-5\,nm nodes. Values indicate improvement relative to conventional FSPDN.}
+\label{tab:comparison}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Metric} & \textbf{FSPDN} & \textbf{BPR} & \textbf{BSPDN} \\
+\hline
+On-chip IR-drop & Baseline & $-$25\%\cite{9817394} & $>$4$\times$ reduction\cite{8932458} \\
+\hline
+Off-chip voltage droop & Baseline & $-$17\%\cite{9817394} & $-$30\%\cite{10185208} \\
+\hline
+Frequency & Baseline & --- & +6\%\cite{10185208} \\
+\hline
+Cell area & Baseline & --- & $-$19\%\cite{10631463} \\
+\hline
+Thermal (hotspot) & Baseline & --- & +45\%\cite{10925422} \\
+\hline
+\end{tabular}
+\end{table}
