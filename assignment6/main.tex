@@ -7,14 +7,14 @@
 \usepackage{hyperref}
 \usepackage{lettrine}
 
-\bibliographystyle{unsrt}
+\bibliographystyle{IEEEtran}
 
 \IEEEoverridecommandlockouts
 \begin{document}
 
 \title{Backside Power Delivery for Sub-5 nm CMOS: Signal Integrity Benefits and Emerging Design Trade-offs}
 
-\author{\IEEEauthorblockN{Daniel Tyukov (5714699)\thanks{This article was written as part of the course EE4C01 Profile Orientation \& Academic Skills of the faculty Electrical Engineering, Mathematics and Computer Science of Delft University of Technology. Word count: 1535.}}
+\author{\IEEEauthorblockN{Daniel Tyukov (5714699)\thanks{This article was written as part of the course EE4C01 Profile Orientation \& Academic Skills of the faculty Electrical Engineering, Mathematics and Computer Science of Delft University of Technology. Submission date: April 9, 2026. Teacher: Matthijs Looij. Total word count: 2000.}}
 \IEEEauthorblockA{Department of Microelectronics\\
 Delft University of Technology\\
 Delft, The Netherlands\\
@@ -30,13 +30,11 @@ a.tsailas-1@student.tudelft.nl}
 \maketitle
 
 \begin{abstract}
-    Technology scaling beyond 5nm for CMOS has revealed major limitations in conventional front-side power delivery networks (FSPDNs), including increased interconnect resistance and routing congestion. In the FSPDN architecture, power and signal interconnects share the same resources, making it increasingly difficult to maintain power integrity without impacting performance. This has put the spotlight on a different architecture, back-side power delivery networks (BSPDNs). 
-    
-    This paper review first outlines key limitations of FSPDNs and then examines the benefits of relocating the power network to the backside of the wafer. BSPDNs decouple signal and power interconnect, which enables a reduction in peak IR drop of up to 85\%, a cell area reduction of around 20\% and other performance improvements.
-    
-    The review also highlights challenges associated with the BSPDN architecture, including increased thermal resistance and increased temperature in hotspots. Furthermore, an increased fabrication complexity due to accompanying features such as nano-TSVs and buried power rails (BPR). 
+Technology scaling beyond 5\,nm has revealed fundamental limitations in conventional front-side power delivery networks (FSPDNs). As interconnect dimensions shrink, increased wire resistance and routing congestion make it progressively harder to maintain power integrity without sacrificing signal routing resources and overall performance. These constraints have motivated the development of back-side power delivery networks (BSPDNs), which relocate the power grid to the wafer backside and decouple it from the signal interconnect entirely.
 
-    Overall, BSPDNs have demonstrated to be a promising evolution in power delivery architecture which will enable scaling beyond the 5nm range.
+This literature review examines the transition from FSPDNs through buried power rails to full backside power delivery in sub-5\,nm CMOS technologies. Nine peer-reviewed sources, published between 2019 and 2025 and drawn from IEEE Xplore, were analysed and compared. The review evaluates reported improvements in IR~drop, voltage droop, operating frequency, and cell area, and contrasts these gains against new challenges introduced by the BSPDN architecture.
+
+The reviewed studies demonstrate that BSPDNs reduce peak IR~drop by more than four times compared to conventional FSPDNs, improve voltage droop by up to 30\%, and enable cell area savings of approximately 19\%. However, backside delivery introduces higher thermal resistance, with hotspot temperatures increasing by up to 45\%, and raises concerns around self-heating and AC impedance resonance. Overall, BSPDNs represent a promising architectural evolution for power delivery at advanced technology nodes, provided that thermal and fabrication challenges are addressed through co-design strategies.
 \end{abstract}
 
 \input{Sections/1.Introduction}
@@ -46,8 +44,20 @@ a.tsailas-1@student.tudelft.nl}
 \input{Sections/5.Limitations of BSPDNs}
 \input{Sections/6.Conclusion}
 
-%TC:ignore 
+%TC:ignore
+
+\section*{Acknowledgement}
+\small
+\textbf{Statement on the use of generative AI}\\
+This article was written within the course EE4C01 Profile Orientation \& Academic Writing. Total word count: 2000.
+
+When writing this text, we:
+\begin{itemize}
+    \item used generative AI to improve the grammar, style and/or spelling of the text.
+\end{itemize}
+\normalsize
+
 \bibliography{bibliography}
- %TC:endignore
+%TC:endignore
 
 \end{document}
